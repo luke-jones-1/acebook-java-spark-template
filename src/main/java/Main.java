@@ -5,6 +5,7 @@ import org.sql2o.Sql2o;
 import org.sql2o.converters.UUIDConverter;
 import org.sql2o.quirks.PostgresQuirks;
 import spark.ModelAndView;
+import spark.Spark;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -30,7 +31,7 @@ public class Main {
         Model model = new Sql2oModel(sql2o);
         UserModel userModel = new Sql2oModel(sql2o);
 
-        get("/posts", (req, res) -> {
+        Spark.get("/posts", (req, res) -> {
             HashMap posts = new HashMap();
             posts.put("posts", model.getAllPosts());
             posts.put("comments", model.getAllComments());
@@ -39,7 +40,7 @@ public class Main {
         }, new VelocityTemplateEngine());
 
 
-        get("/newpost", (req, res) -> {
+        Spark.get("/newpost", (req, res) -> {
             return new ModelAndView(new HashMap<>(),"templates/newPost.vtl");
         }, new VelocityTemplateEngine());
 
@@ -63,7 +64,7 @@ public class Main {
 
         //Sign in methods
 
-        get("/", (req, res) -> {
+        Spark.get("/", (req, res) -> {
             HashMap users = new HashMap();
             return new ModelAndView(users, "templates/sign-in.vtl");
         }, new VelocityTemplateEngine());
@@ -84,7 +85,7 @@ public class Main {
 
         //Sign up methods
 
-        get("/sign-up", (req, res) -> {
+        Spark.get("/sign-up", (req, res) -> {
             HashMap users = new HashMap();
             return new ModelAndView(users, "templates/sign-up.vtl");
         }, new VelocityTemplateEngine());

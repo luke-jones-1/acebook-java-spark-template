@@ -1,7 +1,7 @@
 ### Acebook
 
 [![Build Status](https://travis-ci.org/luke-jones-1/acebook-java-spark-template.svg?branch=master)](https://travis-ci.org/luke-jones-1/acebook-java-spark-template)
-[![codecov](https://codecov.io/gh/luke-jones-1/acebook-java-spark/branch/master/graph/badge.svg)](https://codecov.io/gh/luke-jones-1/acebook-java-spark-template)
+[![codecov](https://codecov.io/gh/luke-jones-1/acebook-java-spark-template/branch/master/graph/badge.svg)](https://codecov.io/gh/luke-jones-1/acebook-java-spark-template)
 
 #### Running the application
 

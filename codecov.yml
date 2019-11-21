@@ -1,6 +1,10 @@
 codecov:
   require_ci_to_pass: yes
 
+ignore:
+  - "src/main/java/*.java"
+  - "src/main/java/VelocityTemplateEngine.java"
+
 coverage:
   precision: 2
   round: down
@@ -27,4 +31,5 @@ comment:
   require_head: yes       # [yes :: must have a head report to post]
   branches: null          # branch names that can post comment
   after_n_builds: 1 #e.g., 5. The number of uploaded reports codecov will receive before posting a comment on a pull request.
+
 
