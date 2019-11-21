@@ -70,9 +70,7 @@ class Sql2oModelTest {
     void createPost() {
         conn.createQuery("TRUNCATE TABLE comments, posts, users")
                 .executeUpdate();
-        model.createPost("Hello guys", "good morning im having a swell day");
-        List<Post> posts = model.getAllPosts();
-        assertEquals(posts.get(0).title, "Hello guys");
+        assertEquals(model.createPost("Hello guys", "good morning im having a swell day").toString(), model.gettingPost("Hello guys"));
     }
 
     @org.junit.jupiter.api.Test
