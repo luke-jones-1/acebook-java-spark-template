@@ -87,6 +87,8 @@ class Sql2oModelTest {
                 .addParameter("post_id", id)
                 .executeUpdate();
         String comments = model.gettingComments(id);
+        List<Comment> comment = new ArrayList<>();
+        comment.add(new Comment(id, comment_id, "Looking good"));
         assertEquals( comments, "[Looking good]");
     }
 
