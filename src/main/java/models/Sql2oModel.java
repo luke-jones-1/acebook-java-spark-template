@@ -19,10 +19,12 @@ public class Sql2oModel implements Model, UserModel {
     public UUID createPost(String title, String content) {
         try (Connection conn = sql2o.beginTransaction()) {
             UUID postUuid = UUID.randomUUID();
-            conn.createQuery("insert into posts(post_id, title, content, time, likes) VALUES (:post_id, :title, :content, CURRENT_TIMESTAMP, 0)")
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            conn.createQuery("insert into posts(post_id, title, content, time, likes) VALUES (:post_id, :title, :content, :timestamp, 0)")
                     .addParameter("post_id", postUuid)
                     .addParameter("title", title)
                     .addParameter("content", content)
+                    .addParameter("timestamp", timestamp)
                     .executeUpdate();
             conn.commit();
             return postUuid;

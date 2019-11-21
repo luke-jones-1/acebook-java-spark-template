@@ -66,17 +66,13 @@ class Sql2oModelTest {
         .executeUpdate();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void createPost() {
         conn.createQuery("TRUNCATE TABLE comments, posts, users")
                 .executeUpdate();
-        conn.createQuery("insert into posts(post_id, title, content, time, likes) VALUES (:post_id, 'Hello guys', 'good morning im having a swell day', :timestamp, 0)")
-                .addParameter("post_id", id)
-                .addParameter("timestamp", timestamp)
-                .executeUpdate();
-        List<Post> posts = new ArrayList<Post>();
-        posts.add(new Post(id, "Hello guys", "good morning im having a swell day", timestamp, 0));
-        assertEquals(model.getAllPosts(), posts);
+        model.createPost("Hello guys", "good morning im having a swell day");
+        List<Post> posts = model.getAllPosts();
+        assertEquals(posts.get(0).title, "Hello guys");
     }
 
     @org.junit.jupiter.api.Test
@@ -118,7 +114,6 @@ class Sql2oModelTest {
     void deleteComment() {
         model.postComment("This is a comment", id.toString());
         List<Comment> comments = model.getAllComments();
-        System.out.println(comments.get(0));
         model.deleteComment(comments.get(0).comment_id.toString());
         assertTrue(model.getAllComments().isEmpty());
     }
