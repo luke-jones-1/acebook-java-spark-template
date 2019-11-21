@@ -10,6 +10,7 @@ public interface Model {
     List getAllPosts();
     void addLike(String id);
     String gettingComments(UUID post_id);
+    String gettingPost(String title);
     void postComment(String comment, String post_id);
     List getAllComments();
     void deleteComment(String comment_id);

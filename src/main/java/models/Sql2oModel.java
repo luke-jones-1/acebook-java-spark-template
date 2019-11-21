@@ -163,5 +163,13 @@ public class Sql2oModel implements Model, UserModel {
             return id.toString().replaceAll("[\\[\\]]","");
         }
     }
+    public String gettingPost(String title){
+        try (Connection conn = sql2o.open()) {
+            List<String> id = conn.createQuery("select post_id from posts where title = :title")
+                    .addParameter("title", title)
+                    .executeAndFetch(String.class);
+            return id.toString().replaceAll("[\\[\\]]","");
+        }
+    }
 }
 
