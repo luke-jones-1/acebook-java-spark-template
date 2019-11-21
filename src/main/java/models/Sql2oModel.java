@@ -89,6 +89,7 @@ public class Sql2oModel implements Model, UserModel {
                     .executeAndFetch(String.class);
             String commentsConvert;
             commentsConvert = String.valueOf(comments);
+            System.out.println(commentsConvert);
             return commentsConvert;
         }
     }

@@ -1,15 +1,36 @@
 <html>
 <head>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+<style>
+.jumbotron {background-color: #1A75FF; color: white;}
+     h1 {font-family: "Times New Roman", Times, serif;}
+     p{font-family: "Times New Roman", Times, serif;}
+     h4{font-family: "Times New Roman", Times, serif;}
+
+ .form{font-family: "Times New Roman", Times, serif;}
+
+</style>
 </head>
 <body>
-    <h1>Welcome to acebook</h1>
-    <h3>Sign in Below</h3>
+
+<div class="jumbotron">
+    <h1>Welcome to Acebook</h1>
+    <p>Sign in below</p>
+</div>
+<div class="container-fluid">
+<div class="form">
     <form action="/sign-in" method="post">
      Email: <input type="text" name="email"/>
      Password: <input type="text" name="password"/>
-     <input type="submit" value="submit"/>
+
+             <button type="submit" class = "btn btn-success">
+             <span class="glyphicon glyphicon-save" aria-hidden="true">
+             </span>Sign in</button>
+
+
     </form>
+ </div>
+ </div>
 
     <h4>new here? <a href="/sign-up">sign up</a></h4>
 </body>
