@@ -18,10 +18,10 @@ public class Main {
     public static void main(String[] args) {
         BasicConfigurator.configure();
 
-        Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/acebook", null, null).load();
+        Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://ec2-54-225-173-42.compute-1.amazonaws.com:5432/dhe2jo3hirf55", "ypkvpmgmllhxzq", "3d4297c8dc1dff49ebdd6d0d664af9091c6de93a13bd43f945e2b8799d0b8e39").load();
         flyway.migrate();
 
-        Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:5432/" + "acebook", null, null, new PostgresQuirks() {
+        Sql2o sql2o = new Sql2o("jdbc:postgresql://ec2-54-225-173-42.compute-1.amazonaws.com:5432/dhe2jo3hirf55", "ypkvpmgmllhxzq", "3d4297c8dc1dff49ebdd6d0d664af9091c6de93a13bd43f945e2b8799d0b8e39", new PostgresQuirks() {
             {
                 // make sure we use default UUID converter.
                 converters.put(UUID.class, new UUIDConverter());
