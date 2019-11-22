@@ -18,6 +18,8 @@ public class Main {
     public static void main(String[] args) {
         BasicConfigurator.configure();
 
+        port(getHerokuAssignedPort());
+
         Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://ec2-54-225-173-42.compute-1.amazonaws.com:5432/dhe2jo3hirf55", "ypkvpmgmllhxzq", "3d4297c8dc1dff49ebdd6d0d664af9091c6de93a13bd43f945e2b8799d0b8e39").load();
         flyway.migrate();
 
@@ -133,4 +135,12 @@ public class Main {
             return null;
         });
     };
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
 }
