@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <style>
-        .jumbotron {background-color: #1A75FF; color: white;}
-        h1 {font-family: "Times New Roman", Times, serif;}
-         .form{font-family: "Times New Roman", Times, serif;}
-      </style>
+    .jumbotron{
+                background-color: #1a75ff;
+                color: white;
+                font-family: "Times New Roman", Times, serif;
+            }
+    </style>
   </head>
   <body>
   <div class="jumbotron">
-  <h1>Make a post on Acebook</h1>
+    <div class="container">
+      <h1>Make a post</h1>
+      <p><form action="/posts" method="get">
+      <form>
+         <button type="submit" class="btn btn-success">
+         <span class="glyphicon glyphicon-home" aria-hidden="true">
+         </span>Home</button>
+      </form>
+      </p>
+    </div>
   </div>
-  <br><br>
-  <div class="container-fluid">
-  <div class="form">
+  <div class="container">
     <form action="/newpost" method="post">
         <input type="text" name="title" placeholder="Title">
         <input type="text" name="content" placeholder="Content">
-         <button type="submit" class = "btn btn-success">
-                     <span class="glyphicon glyphicon-save" aria-hidden="true">
-                     </span>Submit</button>
-        </div>
-        </div>
+        <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+        </span>Make post</button>
     </form>
+  </div>
   </body>
 </html>

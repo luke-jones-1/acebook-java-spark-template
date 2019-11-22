@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class Post {
     private UUID post_id;
-    private String title;
+    public String title;
     private String content;
     private Timestamp time;
     private Integer likes;

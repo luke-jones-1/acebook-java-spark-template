@@ -19,10 +19,12 @@ public class Sql2oModel implements Model, UserModel {
     public UUID createPost(String title, String content) {
         try (Connection conn = sql2o.beginTransaction()) {
             UUID postUuid = UUID.randomUUID();
-            conn.createQuery("insert into posts(post_id, title, content, time, likes) VALUES (:post_id, :title, :content, CURRENT_TIMESTAMP, 0)")
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            conn.createQuery("insert into posts(post_id, title, content, time, likes) VALUES (:post_id, :title, :content, :timestamp, 0)")
                     .addParameter("post_id", postUuid)
                     .addParameter("title", title)
                     .addParameter("content", content)
+                    .addParameter("timestamp", timestamp)
                     .executeUpdate();
             conn.commit();
             return postUuid;
@@ -157,6 +159,14 @@ public class Sql2oModel implements Model, UserModel {
         try (Connection conn = sql2o.open()) {
             List<String> id = conn.createQuery("select id from users where email = :email")
                     .addParameter("email", email)
+                    .executeAndFetch(String.class);
+            return id.toString().replaceAll("[\\[\\]]","");
+        }
+    }
+    public String gettingPost(String title){
+        try (Connection conn = sql2o.open()) {
+            List<String> id = conn.createQuery("select post_id from posts where title = :title")
+                    .addParameter("title", title)
                     .executeAndFetch(String.class);
             return id.toString().replaceAll("[\\[\\]]","");
         }

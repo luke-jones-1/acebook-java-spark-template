@@ -1,3 +1,5 @@
+package app;
+
 import models.*;
 import org.apache.log4j.BasicConfigurator;
 import org.flywaydb.core.Flyway;
@@ -5,6 +7,7 @@ import org.sql2o.Sql2o;
 import org.sql2o.converters.UUIDConverter;
 import org.sql2o.quirks.PostgresQuirks;
 import spark.ModelAndView;
+import spark.Spark;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -17,10 +20,12 @@ public class Main {
     public static void main(String[] args) {
         BasicConfigurator.configure();
 
-        Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/acebook", null, null).load();
+        port(getHerokuAssignedPort());
+
+        Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://ec2-54-225-173-42.compute-1.amazonaws.com:5432/dhe2jo3hirf55", "ypkvpmgmllhxzq", "3d4297c8dc1dff49ebdd6d0d664af9091c6de93a13bd43f945e2b8799d0b8e39").load();
         flyway.migrate();
 
-        Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:5432/" + "acebook", null, null, new PostgresQuirks() {
+        Sql2o sql2o = new Sql2o("jdbc:postgresql://ec2-54-225-173-42.compute-1.amazonaws.com:5432/dhe2jo3hirf55", "ypkvpmgmllhxzq", "3d4297c8dc1dff49ebdd6d0d664af9091c6de93a13bd43f945e2b8799d0b8e39", new PostgresQuirks() {
             {
                 // make sure we use default UUID converter.
                 converters.put(UUID.class, new UUIDConverter());
@@ -30,7 +35,7 @@ public class Main {
         Model model = new Sql2oModel(sql2o);
         UserModel userModel = new Sql2oModel(sql2o);
 
-        get("/posts", (req, res) -> {
+        Spark.get("/posts", (req, res) -> {
             HashMap posts = new HashMap();
             posts.put("posts", model.getAllPosts());
             posts.put("comments", model.getAllComments());
@@ -39,7 +44,7 @@ public class Main {
         }, new VelocityTemplateEngine());
 
 
-        get("/newpost", (req, res) -> {
+        Spark.get("/newpost", (req, res) -> {
             return new ModelAndView(new HashMap<>(),"templates/newPost.vtl");
         }, new VelocityTemplateEngine());
 
@@ -63,7 +68,7 @@ public class Main {
 
         //Sign in methods
 
-        get("/", (req, res) -> {
+        Spark.get("/", (req, res) -> {
             HashMap users = new HashMap();
             return new ModelAndView(users, "templates/sign-in.vtl");
         }, new VelocityTemplateEngine());
@@ -84,7 +89,7 @@ public class Main {
 
         //Sign up methods
 
-        get("/sign-up", (req, res) -> {
+        Spark.get("/sign-up", (req, res) -> {
             HashMap users = new HashMap();
             return new ModelAndView(users, "templates/sign-up.vtl");
         }, new VelocityTemplateEngine());
@@ -132,4 +137,12 @@ public class Main {
             return null;
         });
     };
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
 }
