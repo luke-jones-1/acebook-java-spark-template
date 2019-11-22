@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Make a post</title>
-    <form action="/posts" method="get">
-        <input type="submit" value="Home">
-    </form>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <style>
+        .jumbotron {background-color: #1A75FF; color: white;}
+        h1 {font-family: "Times New Roman", Times, serif;}
+         .form{font-family: "Times New Roman", Times, serif;}
+      </style>
   </head>
   <body>
+  <div class="jumbotron">
+  <h1>Make a post on Acebook</h1>
+  </div>
   <br><br>
+  <div class="container-fluid">
+  <div class="form">
     <form action="/newpost" method="post">
         <input type="text" name="title" placeholder="Title">
         <input type="text" name="content" placeholder="Content">
-        <input type="submit" value="Submit">
+         <button type="submit" class = "btn btn-success">
+                     <span class="glyphicon glyphicon-save" aria-hidden="true">
+                     </span>Submit</button>
+        </div>
+        </div>
     </form>
   </body>
 </html>
