@@ -52,28 +52,6 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-<!--                    <execution>-->
-<!--                        <id>report</id>-->
-<!--                        <phase>prepare-package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>report</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            &lt;!&ndash; Sets the path to the file which contains the execution data. &ndash;&gt;-->
-
-<!--                            <dataFile>target/jacoco.exec</dataFile>-->
-<!--                            &lt;!&ndash; Sets the output directory for the code coverage report. &ndash;&gt;-->
-<!--                            <outputDirectory>target/my-reports</outputDirectory>-->
-
-<!--                            <excludes>-->
-<!--                                <exclude>target/classes/app.Main.class</exclude>-->
-<!--                                <exclude>target/test-classes/app.MainTest.class</exclude>-->
-<!--                                <exclude>src/main/java/app.Main.java</exclude>-->
-<!--                                <exclude>src/test/java/app.MainTest.java</exclude>-->
-<!--                            </excludes>-->
-
-<!--                        </configuration>-->
-<!--                    </execution>-->
                     <execution>
                         <id>post-unit-test</id>
                         <phase>test</phase>
