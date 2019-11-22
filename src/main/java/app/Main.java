@@ -3,7 +3,6 @@ package app;
 import models.*;
 import org.apache.log4j.BasicConfigurator;
 import org.flywaydb.core.Flyway;
-import org.junit.Ignore;
 import org.sql2o.Sql2o;
 import org.sql2o.converters.UUIDConverter;
 import org.sql2o.quirks.PostgresQuirks;
